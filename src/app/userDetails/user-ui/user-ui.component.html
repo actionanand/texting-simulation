@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-12">
+      <app-user-list
+        *ngFor="let userEl of textableUsers; index as i"
+        [index]="i"
+        [user]="userEl"></app-user-list>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-xs-12">
+      <img
+        [src]="imgUrl"
+        alt="{{ user.name }}"
+        class="img-fluid"
+        style="max-height: 300px;">
+    </div>
+  </div>
+<div class="row">
+    <div class="col-xs-12">
+        <h2>{{ user.name }}</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        Contact: +91-{{ user.contact }} & {{ user.email }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {{user.bio }}
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient.name }} - {{ ingredient.amount }}
+        </li>
+      </ul>
+    </div>
+</div> -->
