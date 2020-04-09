@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 import { UserTextService } from 'src/app/services/user-text.service';
 import { User } from 'src/app/models/user.model';
@@ -17,7 +19,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   userSelected: boolean = false;
   id: number;
   user: User;
+  loggedInUser: User;
   paramsSub: Subscription;
+  userSub: Subscription;
+  faPaperPlane = faPaperPlane;
 
   constructor(private userServ: UserTextService, private router: Router, private route: ActivatedRoute) { }
 
@@ -31,10 +36,24 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         this.router.navigate(['/']);
       }
     });
+
+    this.userSub = this.userServ.loggedInUser.subscribe(x => {
+      this.loggedInUser = x;
+    });
+
+  }
+
+  onSubmit(form: NgForm) {
+    const text = form.value.message;
+    console.log(text);
+    // console.log(this.loggedInUser.bio);
+    console.log(this.user.name);
+    form.reset();
   }
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 }

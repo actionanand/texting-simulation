@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { User } from '../models/user.model';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ import { User } from '../models/user.model';
 export class UserTextService {
 
   userChanged = new Subject<User[]>();
+  loggedInUser = new Subject<User>();
   private userSelected: boolean = false;
+  loggedInUserInfo: User;
 
   private users: User[] = [
     {name: 'Anand', email: 'anand@ar.com', occupation: 'Software Engineer', gender: 'Male', contact: 9876543210, bio: 'I am a passionate web developer'},
@@ -20,7 +23,9 @@ export class UserTextService {
     {name: 'Aishwarya', email: 'aishwarya@ar.com', occupation: 'Software Engineer', gender: 'Female', contact: 8876543210, bio: 'I am an android Developer'}
 ];
 
+private messages: Message [];
 private textableUsers: User[];
+
 
   constructor() { }
 
@@ -30,11 +35,13 @@ private textableUsers: User[];
 
   changeusers(user: User) {
     this.userSelected = true;
+    this.loggedInUserInfo = user;
     this.textableUsers = [];
     this.textableUsers = this.users.filter(x => {
       return x.name.toString() !== user.name.toString();
     });
     this.userChanged.next([...this.textableUsers]);
+    this.loggedInUser.next({...user});
   }
 
   isUserSelected() {
@@ -42,7 +49,20 @@ private textableUsers: User[];
   }
 
   getUser(index: number) {
+    this.loggedInUser.next({...this.loggedInUserInfo});
     return this.textableUsers[index];
   }
 
+  getMessages(userA: string, userB: string) {
+    let tempBox: Message[];
+    tempBox = this.messages.filter(x => {
+      return x.fromUser.toString() === userA && x.toUser.toString() === userB
+    });
+    return tempBox;
+  }
+
+  saveMessage(message: Message) {
+    this.messages.push(message);
+  }
+  
 }

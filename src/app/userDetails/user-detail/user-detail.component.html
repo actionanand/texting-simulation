@@ -13,6 +13,21 @@
     </div>
 </div>
 
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">Name</label>
+        <input type="text" class="form-control mb-2" id="inlineFormInput" 
+        placeholder="Send your message" ngModel required name="message">
+      </div>
+      <div class="col-auto">
+        <button type="submit" [disabled]="!f.valid" class="btn btn-outline-success mb-2">
+            Send <fa-icon [icon]="faPaperPlane" [style.color]="'green'"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
 <div class="row">
     <div class="col-xs-12">
         Contact: +91-{{ user.contact }} & {{ user.email }}
@@ -23,6 +38,7 @@
         {{user.bio }}
     </div>
 </div>
+<hr>
 <!-- <div class="row">
     <div class="col-xs-12">
       <ul class="list-group">
