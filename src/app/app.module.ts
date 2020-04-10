@@ -13,6 +13,8 @@ import { UserListComponent } from './userDetails/user-list/user-list.component';
 import { UserDetailComponent } from './userDetails/user-detail/user-detail.component';
 import { HomeComponent } from './home/home.component';
 import { UserUiComponent } from './userDetails/user-ui/user-ui.component';
+import { Page404Component } from './page404/page404.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { UserUiComponent } from './userDetails/user-ui/user-ui.component';
     UserListComponent,
     UserDetailComponent,
     HomeComponent,
-    UserUiComponent
+    UserUiComponent,
+    Page404Component,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

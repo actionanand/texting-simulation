@@ -34,7 +34,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   selected(){
     this.logedIn = true;
     this.userServ.changeusers(this.selectedUser);
-    console.log(this.textableUsers);
+    // console.log(this.textableUsers);
     // alert(this.selectedUser.name)
   }
 

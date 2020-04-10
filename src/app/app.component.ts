@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   
-  title = 'texting-simulation';
+  title = 'Tele Buddy';
 
   constructor() { }
   ngOnInit() {

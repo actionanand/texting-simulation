@@ -25,28 +25,49 @@
             Send <fa-icon [icon]="faPaperPlane" [style.color]="'green'"></fa-icon>
         </button>
       </div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-outline-primary mb-2" (click)="getMyMsg()">
+            {{ showMsg? 'Hide ' : 'Show ' }} <fa-icon [icon]="faEnvelope" [style.color]="'indigo'"></fa-icon>
+        </button>
+      </div>
     </div>
   </form>
 
 <div class="row">
     <div class="col-xs-12">
-        Contact: +91-{{ user.contact }} & {{ user.email }}
+        <b> Contact: </b>  +91-{{ user.contact }} & {{ user.email }}
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        {{user.bio }}
+        <em> {{user.bio }} </em>
     </div>
 </div>
 <hr>
-<!-- <div class="row">
-    <div class="col-xs-12">
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let ingredient of recipe.ingredients">
-          {{ ingredient.name }} - {{ ingredient.amount }}
-        </li>
-      </ul>
+<div class="row" *ngIf="showMsg">
+  <div class="col-md-6">
+    <button type="button" class="btn btn-primary">
+      <span class="badge badge-light"> You </span>
+    </button>
+  </div>
+  <div class="col-md-6">
+    <button type="button" class="btn btn-primary">
+      <span class="badge badge-light"> {{ user.name }} </span>
+    </button>
+  </div>
+</div>
+<br>
+<div class="row" *ngIf="showMsg">
+  <div class="col-md-6">
+    <div class="card border-primary mb-3" style="max-width: 18rem;" *ngFor="let msg of yourMsg">
+      <div class="card-header">{{ msg.content }}</div>
+    </div>    
+  </div>
+  <div class="col-md-6">
+    <div class="card border-secondary mb-3" style="max-width: 18rem;" *ngFor="let msg of othersMsg">
+      <div class="card-header">{{ msg.content }}</div>
     </div>
-</div> -->
+  </div>
+</div>
+
+

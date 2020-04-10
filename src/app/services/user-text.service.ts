@@ -23,8 +23,9 @@ export class UserTextService {
     {name: 'Aishwarya', email: 'aishwarya@ar.com', occupation: 'Software Engineer', gender: 'Female', contact: 8876543210, bio: 'I am an android Developer'}
 ];
 
-private messages: Message [];
+private messages: Message [] = [];
 private textableUsers: User[];
+tempBox: Message[];
 
 
   constructor() { }
@@ -53,16 +54,19 @@ private textableUsers: User[];
     return this.textableUsers[index];
   }
 
-  getMessages(userA: string, userB: string) {
-    let tempBox: Message[];
-    tempBox = this.messages.filter(x => {
-      return x.fromUser.toString() === userA && x.toUser.toString() === userB
+  getMessages(userA: string ,userB: string) {
+    this.tempBox = [];
+    this.tempBox = this.messages.filter(x => {
+      return (x.fromUser == userA && x.toUser == userB)
     });
-    return tempBox;
+    return this.tempBox;
   }
 
-  saveMessage(message: Message) {
-    this.messages.push(message);
+  saveMessage(userB: string, text: string) {
+    const fromUser: string = this.loggedInUserInfo.name;
+    // console.log({fromUser, userB, text});
+    this.messages.push({fromUser, toUser: userB, content: text});
+    this.loggedInUser.next({...this.loggedInUserInfo});
   }
   
 }
