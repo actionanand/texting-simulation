@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "buildng": "ng build --output-path dist --base-href /angular-ghpages/",
+    "buildng": "ng build --output-path dist --base-href /texting-simulation/",
     "predeploy": "npm run buildng",
     "deploy": "gh-pages -d dist",
     "test": "ng test",
