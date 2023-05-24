@@ -469,18 +469,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavBarComponent", function() { return NavBarComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _services_user_text_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/user-text.service */ "./src/app/services/user-text.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _services_user_text_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/user-text.service */ "./src/app/services/user-text.service.ts");
+
 
 
 
 
 var NavBarComponent = /** @class */ (function () {
-    function NavBarComponent(userServ) {
+    function NavBarComponent(userServ, router) {
         this.userServ = userServ;
+        this.router = router;
         this.isCollapsed = false;
         this.logedIn = false;
-        this.faUser = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faUser"];
+        this.faUser = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUser"];
     }
     NavBarComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -494,6 +497,7 @@ var NavBarComponent = /** @class */ (function () {
     NavBarComponent.prototype.selected = function () {
         this.logedIn = true;
         this.userServ.changeusers(this.selectedUser);
+        this.router.navigate(['/users']);
         // console.log(this.textableUsers);
         // alert(this.selectedUser.name)
     };
@@ -503,7 +507,8 @@ var NavBarComponent = /** @class */ (function () {
         }
     };
     NavBarComponent.ctorParameters = function () { return [
-        { type: _services_user_text_service__WEBPACK_IMPORTED_MODULE_3__["UserTextService"] }
+        { type: _services_user_text_service__WEBPACK_IMPORTED_MODULE_4__["UserTextService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
     ]; };
     NavBarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
