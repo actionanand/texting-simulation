@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
@@ -20,7 +21,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   faUser = faUser;
   userSub: Subscription;
 
-  constructor(private userServ: UserTextService) {}
+  constructor(private userServ: UserTextService, private router: Router) {}
 
   ngOnInit() {
     this.myUsers = this.userServ.getUsers();
@@ -35,6 +36,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   selected() {
     this.logedIn = true;
     this.userServ.changeusers(this.selectedUser);
+    this.router.navigate(['/users']);
     // console.log(this.textableUsers);
     // alert(this.selectedUser.name)
   }
