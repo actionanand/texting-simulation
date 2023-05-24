@@ -1,8 +1,16 @@
-<div class="row">
-    <div class="col-12">
-      <app-user-list
-        *ngFor="let userEl of textableUsers; index as i"
-        [index]="i"
-        [user]="userEl"></app-user-list>
-    </div>
+<div class="row" *ngIf="textableUsers.length > 0; else loadDefaultMsg">
+  <div class="col-12">
+    <app-user-list *ngFor="let userEl of textableUsers; index as i" [index]="i" [user]="userEl"></app-user-list>
+  </div>
 </div>
+
+<ng-template #loadDefaultMsg>
+  <!-- <div class="card" style="width: 18rem"> -->
+  <div class="card">
+    <img [src]="homeImg" class="card-img-top" alt="home default image" />
+    <div class="card-body">
+      <h5 class="card-title">Log-in to get started...</h5>
+      <!-- <p class="card-text">Click on the right top dropdown and choose one user to get logged-in.</p> -->
+    </div>
+  </div>
+</ng-template>

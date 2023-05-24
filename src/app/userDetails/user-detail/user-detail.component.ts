@@ -5,49 +5,55 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { faPaperPlane, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-import { UserTextService } from 'src/app/services/user-text.service';
-import { User } from 'src/app/models/user.model';
-import { Message } from 'src/app/models/message.model';
+import { UserTextService } from '../../services/user-text.service';
+import { User } from '../../models/user.model';
+import { Message } from '../../models/message.model';
+import { maleUser } from '../../../assets/assets-files/maleUser';
+import { femaleUser } from '../../../assets/assets-files/femaleUser';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
-
-  imgUrl: string = 'https://clipartstation.com/wp-content/uploads/2018/09/contact-information-clipart-6.jpg';
+  maleUser: string = maleUser;
+  femaleUser: string = femaleUser;
   userSelected: boolean = false;
   id: number;
   user: User;
   loggedInUser: string = '';
+
   paramsSub: Subscription;
   userSub: Subscription;
+  userSelectedSub: Subscription;
+
   faPaperPlane = faPaperPlane;
   faEnvelope = faEnvelope;
   yourMsg: Message[] = [];
   othersMsg: Message[] = [];
   showMsg: boolean = false;
 
-
-  constructor(private userServ: UserTextService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private userServ: UserTextService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.userSelected = this.userServ.isUserSelected();
+    this.userSelectedSub = this.userServ.isUserSelected$.subscribe(
+      userSelection => (this.userSelected = userSelection),
+    );
+
     this.paramsSub = this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
-      if(this.userSelected) {
+      if (this.userSelected) {
         this.user = this.userServ.getUser(this.id);
       } else {
         this.router.navigate(['/']);
       }
     });
 
-    this.userSub = this.userServ.loggedInUser.subscribe(x => {
+    this.userSub = this.userServ.loggedInUser$.subscribe(x => {
       this.loggedInUser = x.name.toString();
       this.showMsg = false;
     });
-
   }
 
   onSubmit(form: NgForm) {
@@ -67,8 +73,16 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.userSub.unsubscribe();
-  }
+    if (this.paramsSub) {
+      this.paramsSub.unsubscribe();
+    }
 
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
+
+    if(this.userSelectedSub) {
+      this.userSelectedSub.unsubscribe();
+    }
+  }
 }

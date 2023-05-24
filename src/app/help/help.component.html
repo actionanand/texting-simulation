@@ -1,15 +1,37 @@
-<div class="card text-center">
-    <div class="card-header">
-      Tele Buddy
-    </div>
+<ng-template [ngIf]="pageInfo === 'help'">
+  <div class="card text-center">
+    <div class="card-header">Tele Buddy</div>
     <div class="card-body">
       <h5 class="card-title">How to get it started?</h5>
-      <p class="card-text">To make this app working, you've to choose the user from the top 
-          right cornor. Choosing the user acts a log-in function.
+      <p class="card-text">
+        To make this app working, you've to choose the user from the top right cornor. Choosing the user acts a log-in
+        function.
       </p>
       <a routerLink="/" class="btn btn-primary">Go Home</a>
     </div>
-    <div class="card-footer text-muted">
-      Enjoy your day.
-    </div>
+    <div class="card-footer text-muted">Enjoy your day.</div>
   </div>
+</ng-template>
+
+<ng-template [ngIf]="pageInfo === 'userPage'">
+  <div class="card text-center" *ngIf="userSelected === true">
+    <div class="card-header">Tele Buddy</div>
+    <div class="card-body">
+      <h5 class="card-title">How to text or view a message?</h5>
+      <p class="card-text">Now choose a user from left side display pane, to view or text him/her.</p>
+    </div>
+    <div class="card-footer text-muted">Enjoy your day.</div>
+  </div>
+
+  <div class="card text-center" *ngIf="userSelected === false">
+    <div class="card-header">Tele Buddy</div>
+    <div class="card-body">
+      <h5 class="card-title">How to get it started?</h5>
+      <div class="card-text">
+        <p>Please choose the user from the top right corner's dropdown menu!</p>
+        <p>If the user is logged-in, the top right corner user icon will turn into green from red.</p>
+      </div>
+    </div>
+    <div class="card-footer text-muted">Enjoy your day.</div>
+  </div>
+</ng-template>

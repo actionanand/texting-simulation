@@ -1,49 +1,55 @@
 <div class="row">
-    <div class="col-xs-12">
-      <img
-        [src]="imgUrl"
-        alt="{{ user.name }}"
-        class="img-fluid"
-        style="max-height: 300px;">
-    </div>
+  <div class="col-xs-12">
+    <ng-template [ngIf]="user.gender === 'Male'">
+      <img [src]="maleUser" alt="{{ user.name }}" class="img-fluid" style="max-height: 300px" />
+    </ng-template>
+
+    <ng-template [ngIf]="user.gender === 'Female'">
+      <img [src]="femaleUser" alt="{{ user.name }}" class="img-fluid" style="max-height: 300px" />
+    </ng-template>
   </div>
+</div>
 <div class="row">
-    <div class="col-xs-12">
-        <h2>{{ user.name }}</h2>
-    </div>
+  <div class="col-xs-12">
+    <h2>{{ user.name }}</h2>
+  </div>
 </div>
 
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <div class="form-row align-items-center">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInput">Name</label>
-        <input type="text" class="form-control mb-2" id="inlineFormInput" 
-        placeholder="Send your message" ngModel required name="message">
-      </div>
-      <div class="col-auto">
-        <button type="submit" [disabled]="!f.valid" class="btn btn-outline-success mb-2">
-            Send <fa-icon [icon]="faPaperPlane" [style.color]="'green'"></fa-icon>
-        </button>
-      </div>
-      <div class="col-auto">
-        <button type="button" class="btn btn-outline-primary mb-2" (click)="getMyMsg()">
-            {{ showMsg? 'Hide ' : 'Show ' }} <fa-icon [icon]="faEnvelope" [style.color]="'indigo'"></fa-icon>
-        </button>
-      </div>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <input
+        type="text"
+        class="form-control mb-2"
+        id="inlineFormInput"
+        placeholder="Send your message"
+        ngModel
+        required
+        name="message" />
     </div>
-  </form>
+    <div class="col-auto">
+      <button type="submit" [disabled]="!f.valid" class="btn btn-outline-success mb-2">
+        Send <fa-icon [icon]="faPaperPlane" [style.color]="'green'"></fa-icon>
+      </button>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-primary mb-2" (click)="getMyMsg()">
+        {{ showMsg ? 'Hide ' : 'Show ' }} <fa-icon [icon]="faEnvelope" [style.color]="'indigo'"></fa-icon>
+      </button>
+    </div>
+  </div>
+</form>
 
 <div class="row">
-    <div class="col-xs-12">
-        <b> Contact: </b>  +91-{{ user.contact }} & {{ user.email }}
-    </div>
+  <div class="col-xs-12"><b> Contact: </b> +91-{{ user.contact }} & {{ user.email }}</div>
 </div>
 <div class="row">
-    <div class="col-xs-12">
-        <em> {{user.bio }} </em>
-    </div>
+  <div class="col-xs-12">
+    <em> {{ user.bio }} </em>
+  </div>
 </div>
-<hr>
+<hr />
 <div class="row" *ngIf="showMsg">
   <div class="col-md-6">
     <button type="button" class="btn btn-primary">
@@ -56,18 +62,16 @@
     </button>
   </div>
 </div>
-<br>
+<br />
 <div class="row" *ngIf="showMsg">
   <div class="col-md-6">
-    <div class="card border-primary mb-3" style="max-width: 18rem;" *ngFor="let msg of yourMsg">
+    <div class="card border-primary mb-3" style="max-width: 18rem" *ngFor="let msg of yourMsg">
       <div class="card-header">{{ msg.content }}</div>
-    </div>    
+    </div>
   </div>
   <div class="col-md-6">
-    <div class="card border-secondary mb-3" style="max-width: 18rem;" *ngFor="let msg of othersMsg">
+    <div class="card border-secondary mb-3" style="max-width: 18rem" *ngFor="let msg of othersMsg">
       <div class="card-header">{{ msg.content }}</div>
     </div>
   </div>
 </div>
-
-

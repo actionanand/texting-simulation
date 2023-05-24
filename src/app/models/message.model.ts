@@ -1,5 +1,5 @@
 export interface Message {
-    fromUser: string;
-    toUser: string;
-    content: string;
+  fromUser: string;
+  toUser: string;
+  content: string;
 }
