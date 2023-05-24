@@ -28,6 +28,8 @@
         class="form-control"
         id="selectUser"
         class="nav-bar-user-select">
+        <option [ngValue]="undefined" [disabled]="true">Log In | Sign up</option>
+        <option [disabled]="true">Please Select</option>
         <option *ngFor="let user of myUsers" [ngValue]="user">{{ user.name }}</option>
       </select>
     </div>
