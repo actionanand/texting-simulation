@@ -26,16 +26,10 @@ import { HelpComponent } from './help/help.component';
     HomeComponent,
     UserUiComponent,
     Page404Component,
-    HelpComponent
+    HelpComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    NgbModule,
-    FontAwesomeModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, FormsModule, NgbModule, FontAwesomeModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

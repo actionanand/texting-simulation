@@ -9,10 +9,9 @@ import { UserTextService } from '../services/user-text.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-
   public isCollapsed = false;
   myUsers: User[];
   textableUsers: User[];
@@ -21,17 +20,19 @@ export class NavBarComponent implements OnInit, OnDestroy {
   faUser = faUser;
   userSub: Subscription;
 
-  constructor(private userServ: UserTextService) { }
+  constructor(private userServ: UserTextService) {}
 
   ngOnInit() {
     this.myUsers = this.userServ.getUsers();
 
-    this.userSub = this.userServ.userChanged.subscribe(users => {
+    this.userSub = this.userServ.userChanged$.subscribe(users => {
       this.textableUsers = users;
+      // this.selectedUser = this.myUsers[0];
+      // this.userServ.changeusers(this.selectedUser);
     });
   }
 
-  selected(){
+  selected() {
     this.logedIn = true;
     this.userServ.changeusers(this.selectedUser);
     // console.log(this.textableUsers);
@@ -39,7 +40,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSub.unsubscribe();
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
   }
-
 }

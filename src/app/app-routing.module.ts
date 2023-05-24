@@ -7,16 +7,21 @@ import { Page404Component } from './page404/page404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/users', pathMatch: 'full' },
-  { path: 'users', component: HomeComponent, children: [
-    { path: ':id', component: UserDetailComponent }
-  ] },
-  { path: 'help', component: HelpComponent },
+  {
+    path: 'users',
+    component: HomeComponent,
+    children: [
+      { path: '', component: HelpComponent, data: {page: 'userPage'} },
+      { path: ':id', component: UserDetailComponent },
+    ],
+  },
+  { path: 'help', component: HelpComponent, data: { page: 'help' } },
   { path: '404', component: Page404Component },
-  { path: '**', redirectTo: '/404' }
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
